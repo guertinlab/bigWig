@@ -99,11 +99,11 @@ metaprofile.bigWig <- function(bed, bw.plus, bw.minus = NULL, step = 1, name = "
   N = dim(bed)[2]
   mat = NULL
   if (N >= 6) {
-    stopifnot(bw.minus != NULL)
+    stopifnot(!is.null(bw.minus))
     mat = bed6.step.bpQuery.bigWig(bw.plus, bw.minus, bed, step, abs.value = TRUE, as.matrix = TRUE, follow.strand = TRUE)
   } else {
     if (!is.null(bw.minus))
-      warning("bw.minus != NULL but BED contains no strand information")
+      warning("bw.minus is not NULL but BED contains no strand information")
     mat = bed.step.bpQuery.bigWig(bw.plus, bed, step, as.matrix = TRUE)
   }
   

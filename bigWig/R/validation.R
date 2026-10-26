@@ -10,7 +10,7 @@ original.expr <- function(arg, n) {
 }
 
 valid.bw <- function(bw) {
-  if (!(class(bw) == "bigWig" || (is.character(bw) && length(bw) == 2 && (!any(is.na(bw) | is.null(bw)))))) {
+  if (!(inherits(bw, "bigWig") || (is.character(bw) && length(bw) == 2 && (!any(is.na(bw) | is.null(bw)))))) {
     stop("invalid bigWig: ", original.expr(bw, 2))
   }
 }
@@ -18,7 +18,7 @@ valid.bw <- function(bw) {
 valid.chrom <- function(bw, chrom) {
   stopifnot(is.character(chrom))
   
-  if (class(bw) == "bigWig") {
+  if (inherits(bw, "bigWig")) {
     if (!(chrom %in% bw$chroms))
     stop("bigWig does not contain information on chromosome: ", chrom)
     return(TRUE)

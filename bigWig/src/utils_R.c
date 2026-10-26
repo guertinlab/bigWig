@@ -126,7 +126,7 @@ static int place_record(struct end_frame ** frames, int start, int end) {
 
   if (*frames == NULL) {
     level = 1;
-    *frames = Calloc(1, struct end_frame);
+    *frames = R_Calloc(1, struct end_frame);
     (*frames)->max_end = end;
     (*frames)->next = NULL;
     return level;
@@ -142,7 +142,7 @@ static int place_record(struct end_frame ** frames, int start, int end) {
     }
 
     if (ptr->next == NULL) {
-      ptr->next = Calloc(1, struct end_frame);
+      ptr->next = R_Calloc(1, struct end_frame);
       ptr->next->max_end = end;
       ptr->next->next = NULL;
       return level + 1;
@@ -157,7 +157,7 @@ static void free_frames(struct end_frame * frames) {
 
   while (frames != NULL) {
     next = frames->next;
-    Free(frames);
+    R_Free(frames);
     frames = next;
   }
 }
