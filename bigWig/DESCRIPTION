@@ -1,19 +1,29 @@
-Copyright: The code in src/jkweb is Copyright (c) 2000-2002 Jim Kent (c) 2003-2014 Regents of the University of California.  All other code is Copyright (c) 2012-2014 Cornell University.
 Package: bigWig
 Type: Package
 Title: R Interface to Query UCSC BigWig Files
-Version: 0.2-9
-Date: 2014-11-20
-Author: Andre L. Martins, copyright holder Cornell University. src/jkweb by Jim Kent, copyright by Jim Kent and Regents of the University of California.
-Maintainer: Andre L. Martins <alm253@cornell.edu>
-Description: R interface to query UCSC bigWig files
-  Implementation uses UCSC Genome Browser code, so it supports the access modes that bigWig tools support, including http access to remote bigWig files.
+Version: 0.99.0
+Date: 2026-10-26
+Authors@R: c(
+    person("Andre L.", "Martins", role = "aut",
+           comment = "Original author, Cornell University"),
+    person("Luther", "Vucic", role = "aut"),
+    person("Michael J.", "Guertin", role = c("aut", "cre"),
+           email = "guertin@virginia.edu"),
+    person("Jim", "Kent", role = "cph",
+           comment = "src/jkweb, copyright Jim Kent and Regents of the University of California"))
+Description: R interface to query UCSC bigWig files using UCSC Genome Browser
+    code (Kent et al.). Supports all bigWig access modes including HTTP access
+    to remote files. Provides probe-level and base-pair resolution queries,
+    strand-aware metaprofile computation, and mappability correction via
+    bwMap objects.
+biocViews: Coverage, DataImport, Sequencing, Visualization
 Imports: boot
-Depends: R (>= 2.12.0)
+Depends: R (>= 4.0.0)
+Suggests: knitr, rmarkdown, bookdown, testthat (>= 3.0.0)
 VignetteBuilder: knitr
-Suggests:  knitr, rmarkdown, testthat, bookdown
 License: BSD_3_clause + file LICENSE
-LazyLoad: yes
 Encoding: UTF-8
 NeedsCompilation: yes
 SystemRequirements: GNU make
+URL: https://github.com/guertinlab/bigWig
+BugReports: https://github.com/guertinlab/bigWig/issues
