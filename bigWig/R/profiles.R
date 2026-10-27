@@ -6,15 +6,15 @@ quantiles.metaprofile <- function(mat, quantiles = c(0.875, 0.5, 0.125)) {
   stopifnot(length(quantiles) == 3)
   stopifnot(all(quantiles < 1 & quantiles > 0))
   
-  qTop = quantiles[1]
-  qMid = quantiles[2]
-  qBottom = quantiles[3]
+  qTop <- quantiles[1]
+  qMid <- quantiles[2]
+  qBottom <- quantiles[3]
   
-  N = dim(mat)[2]
+  N <- dim(mat)[2]
   
-  cTop = sapply(1:N, function(idx) quantile(mat[, idx], qTop, na.rm = TRUE))
-  cMid = sapply(1:N, function(idx) quantile(mat[, idx], qMid, na.rm = TRUE))
-  cBottom = sapply(1:N, function(idx) quantile(mat[, idx], qBottom, na.rm = TRUE))
+  cTop <- vapply(seq_len(N), function(idx) quantile(mat[, idx], qTop, na.rm = TRUE), numeric(1))
+  cMid <- vapply(seq_len(N), function(idx) quantile(mat[, idx], qMid, na.rm = TRUE), numeric(1))
+  cBottom <- vapply(seq_len(N), function(idx) quantile(mat[, idx], qBottom, na.rm = TRUE), numeric(1))
   
   # add step if present
   if (!is.null(attr(mat, "step")))
@@ -28,13 +28,13 @@ subsampled.quantiles.metaprofile <- function(mat, quantiles = c(0.875, 0.5, 0.12
   stopifnot(all(quantiles < 1 & quantiles > 0))
   
   # create sub-samples
-  N = dim(mat)[1]
-  M = dim(mat)[2]
+  N <- dim(mat)[1]
+  M <- dim(mat)[2]
   
-  result = matrix(nrow=n.samples, ncol=M)
-  K = as.integer(round(N * fraction, 0))
+  result <- matrix(nrow=n.samples, ncol=M)
+  K <- as.integer(round(N * fraction, 0))
 
-  for (i in 1:n.samples) {
+  for (i in seq_len(n.samples)) {
     idx <- sample(N, size=K, replace=FALSE)
     
     result[i, ] = colMeans(mat[idx, ], na.rm = TRUE)
@@ -47,15 +47,15 @@ subsampled.quantiles.metaprofile <- function(mat, quantiles = c(0.875, 0.5, 0.12
 }
 
 confinterval.metaprofile <- function(mat, alpha = 0.05) {
-  N = dim(mat)[2]
-  cMid = colMeans(mat, na.rm = TRUE)
-  sderrs = apply(mat, 2, function(col) {
-    sdev = sd(col, na.rm = TRUE)
-    M = sum(!is.na(col))
+  N <- dim(mat)[2]
+  cMid <- colMeans(mat, na.rm = TRUE)
+  sderrs <- apply(mat, 2, function(col) {
+    sdev <- sd(col, na.rm = TRUE)
+    M <- sum(!is.na(col))
     sdev / sqrt(M)
   })
   
-  delta = pnorm(1 - alpha/2) * sderrs
+  delta <- pnorm(1 - alpha/2) * sderrs
   
   # add step if present
   if (!is.null(attr(mat, "step")))
@@ -69,9 +69,9 @@ bootstrapped.confinterval.metaprofile <- function(mat, alpha = 0.05, n.samples =
     colMeans(tbl[idxs,], na.rm=TRUE)
   }
   
-  res = boot::boot(mat, stat, R = n.samples)
-  aux = sapply(1:dim(mat)[2], function(idx) {
-    tmp = boot::boot.ci(res, type = "norm", index = idx, conf = 1 - alpha)
+  res <- boot::boot(mat, stat, R = n.samples)
+  aux <- sapply(seq_len(dim(mat)[2]), function(idx) {
+    tmp <- boot::boot.ci(res, type = "norm", index = idx, conf = 1 - alpha)
     c(tmp$normal[,2], tmp$t0, tmp$normal[,3])
   })
   
@@ -96,31 +96,31 @@ bootstrapped.confinterval.metaprofile <- function(mat, alpha = 0.05, n.samples =
 metaprofile.bigWig <- function(bed, bw.plus, bw.minus = NULL, step = 1, name = "Signal", matrix.op = NULL, profile.op = subsampled.quantiles.metaprofile, ...) {
   #
   # 1. collect data
-  N = dim(bed)[2]
-  mat = NULL
+  N <- dim(bed)[2]
+  mat <- NULL
   if (N >= 6) {
     stopifnot(!is.null(bw.minus))
-    mat = bed6.step.bpQuery.bigWig(bw.plus, bw.minus, bed, step, abs.value = TRUE, as.matrix = TRUE, follow.strand = TRUE)
+    mat <- bed6.step.bpQuery.bigWig(bw.plus, bw.minus, bed, step, abs.value = TRUE, as.matrix = TRUE, follow.strand = TRUE)
   } else {
     if (!is.null(bw.minus))
       warning("bw.minus is not NULL but BED contains no strand information")
-    mat = bed.step.bpQuery.bigWig(bw.plus, bed, step, as.matrix = TRUE)
+    mat <- bed.step.bpQuery.bigWig(bw.plus, bed, step, as.matrix = TRUE)
   }
   
   #
   # 2. apply matrix transformation
   if (!is.null(matrix.op))
-    mat = matrix.op(mat, ...)
+    mat <- matrix.op(mat, ...)
   
   #
   # 3. apply profile operation
-  result = profile.op(mat, ...)
+  result <- profile.op(mat, ...)
   
   #
   # 4. create result
-  X0 = 0 # can't really tell what X0 was from the input arguments
+  X0 <- 0 # can't really tell what X0 was from the input arguments
   
-  res = c(list(name = name, X0 = X0, step = step), result)
+  res <- c(list(name = name, X0 = X0, step = step), result)
   
   class(res) <- "metaprofile"
   return(res)

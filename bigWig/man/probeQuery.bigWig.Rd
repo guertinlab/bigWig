@@ -65,3 +65,19 @@ bed6.step.probeQuery.bigWig(bw.plus, bw.minus, bed6, step,
 % R documentation directory.
 \keyword{ bigWig }
 \keyword{ query }% __ONLY ONE__ keyword per line
+
+\examples{
+bw <- load.bigWig(system.file("extdata", "test_probe_bp.bigWig", package = "bigWig"))
+
+# single-region probe query
+region.probeQuery.bigWig(bw, "chrP", 0, 50, op = "wavg")
+
+# BED query
+bed <- data.frame(chrom = "chrP", start = 0L, end = 50L)
+bed.region.probeQuery.bigWig(bw, bed, op = "sum")
+
+# step query
+step.probeQuery.bigWig(bw, "chrP", 0, 50, step = 5, op = "wavg")
+
+unload.bigWig(bw)
+}

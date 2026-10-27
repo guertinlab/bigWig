@@ -42,3 +42,14 @@ metaprofile.bigWig(bed, bw.plus, bw.minus = NULL, step = 1, name = "Signal",
 }
 
 \author{André Luís Martins}
+
+\examples{
+bw <- load.bigWig(system.file("extdata", "test_probe_bp.bigWig", package = "bigWig"))
+bed <- data.frame(chrom = "chrP", start = 0L, end = 50L,
+                  name = ".", score = 0L, strand = "+",
+                  stringsAsFactors = FALSE)
+mat <- bed.step.bpQuery.bigWig(bw, bed, step = 5, as.matrix = TRUE)
+quantiles.metaprofile(mat)
+confinterval.metaprofile(mat)
+unload.bigWig(bw)
+}

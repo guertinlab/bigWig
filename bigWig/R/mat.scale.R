@@ -13,7 +13,7 @@ rpkm.scale <- function(mat, step, libSize, ...) {
   # m1 = mat * (step / 1000) => reads / kb
   # million mapped := libSize / 10^6
   # m1 / (libSize / 10^6) => reads / kb / million mapped
-  scaleFactor = (step / 1000) / (libSize / 10^6)
+  scaleFactor <- (step / 1000) / (libSize / 10^6)
   
   mat * scaleFactor
 }
@@ -24,7 +24,7 @@ densityToOne.scale <- function(mat, na.on.zero = TRUE, ...) {
     if (all(is.na(row)))
       return(row)
     
-    total = sum(row, na.rm = TRUE)
+    total <- sum(row, na.rm = TRUE)
     if (total == 0) {
       if (na.on.zero)
         return(rep(NA, length(row)))
@@ -40,7 +40,7 @@ maxToOne.scale <- function(mat, ...) {
     if (all(is.na(row)))
       return(row)
     
-    high = max(row, na.rm = TRUE)
+    high <- max(row, na.rm = TRUE)
     if (high == 0)
       return(rep(0, length(row)))
     
@@ -53,8 +53,8 @@ zeroToOne.scale <- function(mat, ...) {
     if (all(is.na(row)))
       return(row)
     
-    high = max(row, na.rm = TRUE)
-    low = min(row, na.rm = TRUE)
+    high <- max(row, na.rm = TRUE)
+    low <- min(row, na.rm = TRUE)
     
     if (high == low) {
       if (high == 0)

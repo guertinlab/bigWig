@@ -8,7 +8,8 @@ Authors@R: c(
            comment = "Original author, Cornell University"),
     person("Luther", "Vucic", role = "aut"),
     person("Michael J.", "Guertin", role = c("aut", "cre"),
-           email = "guertin@virginia.edu"),
+           email = "guertin@uchc.edu",
+           comment = c(ORCID = "0000-0001-7148-3538")),
     person("Jim", "Kent", role = "cph",
            comment = "src/jkweb, copyright Jim Kent and Regents of the University of California"))
 Description: R interface to query UCSC bigWig files using UCSC Genome Browser
@@ -18,7 +19,7 @@ Description: R interface to query UCSC bigWig files using UCSC Genome Browser
     bwMap objects.
 biocViews: Coverage, DataImport, Sequencing, Visualization
 Imports: boot
-Depends: R (>= 4.0.0)
+Depends: R (>= 4.5.0)
 Suggests: knitr, rmarkdown, bookdown, testthat (>= 3.0.0)
 VignetteBuilder: knitr
 License: BSD_3_clause + file LICENSE

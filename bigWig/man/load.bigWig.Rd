@@ -51,3 +51,10 @@ Kent WJ, Zweig AS, Barber G, Hinrichs AS, Karolchik D. BigWig and BigBed: enabli
 \keyword{ bigWig }
 \keyword{ load }
 \keyword{ read }
+
+\examples{
+bw_file <- system.file("extdata", "test3_chrU.bigWig", package = "bigWig")
+bw <- load.bigWig(bw_file)
+print(bw)
+unload.bigWig(bw)
+}

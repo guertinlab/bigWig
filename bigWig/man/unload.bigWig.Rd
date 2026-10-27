@@ -11,6 +11,8 @@ unload.bigWig(bigWig)
   \item{bigWig}{a bigWig object}
 }
 
+\value{Called for its side effect; returns NULL invisibly.}
+
 \author{André Luís Martins}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
@@ -22,3 +24,8 @@ unload.bigWig(bigWig)
 \keyword{ bigwig }
 \keyword{ unload }
 \keyword{ free }
+
+\examples{
+bw <- load.bigWig(system.file("extdata", "test3_chrU.bigWig", package = "bigWig"))
+unload.bigWig(bw)
+}

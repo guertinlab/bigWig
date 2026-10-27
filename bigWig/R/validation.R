@@ -2,7 +2,7 @@ original.expr <- function(arg, n) {
   newname <- substitute(arg)
   
   # Travel up the frame stack until we hit the top.
-  for(i in 1:n) {
+  for(i in seq_len(n)) {
     oldname <- do.call("substitute", list(as.name(newname), parent.frame(i)))
     newname <- oldname
   }
@@ -23,7 +23,7 @@ valid.chrom <- function(bw, chrom) {
     stop("bigWig does not contain information on chromosome: ", chrom)
     return(TRUE)
   } else if (is.character(bw) && length(bw) == 2) {
-    path = paste(bw[1], chrom, bw[2], sep='')
+    path <- paste(bw[1], chrom, bw[2], sep='')
     if (file.exists(path))
     return(TRUE)
     stop("can't find bigWig file for chromosome: ", chrom)

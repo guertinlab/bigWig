@@ -14,7 +14,7 @@ region.probeQuery.bigWig <- function(bw, chrom, start, end, op = "wavg", abs.val
   valid.query.range(start, end)
   valid.chrom(bw, chrom)
   
-  bed = data.frame(chrom, start, end)
+  bed <- data.frame(chrom, start, end)
   .Call(bigWig_probe_query, bw, NULL, bed, op, NA, FALSE, FALSE, TRUE, gap.value, abs.value, FALSE)
 }
 
@@ -47,17 +47,17 @@ step.probeQuery.bigWig <- function(bw, chrom, start, end, step, op = "wavg", abs
   if (is.null(start) && is.null(end)) {
     # if we got a path, load the bigWig
     if (is.character(bw))
-      bw = load.bigWig(paste(bw[1], chrom, bw[2], sep=''))
+      bw <- load.bigWig(paste(bw[1], chrom, bw[2], sep=''))
   
-    chromIdx = which(bw$chroms == chrom)
-    bed = data.frame(chrom, 0, bw$chromSizes[chromIdx])
+    chromIdx <- which(bw$chroms == chrom)
+    bed <- data.frame(chrom, 0, bw$chromSizes[chromIdx])
     
     return(.Call(bigWig_probe_query, bw, NULL, bed, op, step, FALSE, with.attributes, FALSE, gap.value, abs.value, FALSE)[[1]])
   }
   
   valid.query.range(start, end, step = step)
   
-  bed = data.frame(chrom, start, end)
+  bed <- data.frame(chrom, start, end)
   .Call(bigWig_probe_query, bw, NULL, bed, op, step, FALSE, with.attributes, FALSE, gap.value, abs.value, FALSE)[[1]]
 }
 
@@ -66,7 +66,7 @@ bed.step.probeQuery.bigWig <- function(bw, bed, step, op = "wavg", abs.value = F
   bed.valid.query.range(bed, step = step)
   valid.probe.op(op)
   if (as.matrix) {
-    sizes = bed[,3] - bed[,2]
+    sizes <- bed[,3] - bed[,2]
     stopifnot(all(sizes == sizes[1]))
   }
   
@@ -82,7 +82,7 @@ bed6.step.probeQuery.bigWig <- function(bw.plus, bw.minus, bed6, step, op = "wav
   
   valid.probe.op(op)
   if (as.matrix) {
-    sizes = bed6[,3] - bed6[,2]
+    sizes <- bed6[,3] - bed6[,2]
     stopifnot(all(sizes == sizes[1]))
   }
   

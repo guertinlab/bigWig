@@ -16,6 +16,8 @@
 
 \details{Displays information bigWig instance in the same format as the command line tool bigWigInfo.}
 
+\value{Called for its side effect (printing); returns the bigWig object invisibly.}
+
 \author{André Luís Martins}
 
 \seealso{See \code{\link{load.bigWig}} to load a bigWig}
@@ -24,3 +26,9 @@
 % R documentation directory.
 \keyword{ bigWig }
 \keyword{ print }
+
+\examples{
+bw <- load.bigWig(system.file("extdata", "test3_chrU.bigWig", package = "bigWig"))
+print(bw)
+unload.bigWig(bw)
+}

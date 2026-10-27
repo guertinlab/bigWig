@@ -13,10 +13,10 @@ region.bpQuery.bigWig <- function(bw, chrom, start, end, strand = NA, op = "sum"
   
   if (!is.na(strand)) {
     stopifnot(valid.strand(strand))
-    bed = data.frame(chrom, start, end, 0, 0, strand)
+    bed <- data.frame(chrom, start, end, 0, 0, strand)
     .Call(bigWig_bp_query, bw, bw, bed, op, NA, TRUE, FALSE, TRUE, gap.value, abs.value, FALSE, bwMap)
   } else {
-    bed = data.frame(chrom, start, end)
+    bed <- data.frame(chrom, start, end)
     .Call(bigWig_bp_query, bw, NULL, bed, op, NA, FALSE, FALSE, TRUE, gap.value, abs.value, FALSE, bwMap)
   }
 }
@@ -31,7 +31,7 @@ bed.region.bpQuery.bigWig <- function(bw, bed, strand = NA, op = "sum", abs.valu
     
   if (!is.na(strand)) {
     stopifnot(valid.strand(strand))
-    bed = cbind(bed[,c(1:3)], data.frame(0, 0, strand))
+    bed <- cbind(bed[,c(1:3)], data.frame(0, 0, strand))
     .Call(bigWig_bp_query, bw, bw, bed, op, NA, TRUE, FALSE, TRUE, gap.value, abs.value, FALSE, bwMap)
   } else {
     .Call(bigWig_bp_query, bw, NULL, bed, op, NA, FALSE, FALSE, TRUE, gap.value, abs.value, FALSE, bwMap)
@@ -63,14 +63,14 @@ step.bpQuery.bigWig <- function(bw, chrom, start, end, step, strand = NA, op = "
   
   if (is.null(start) && is.null(end)) {
     stopifnot(is.na(strand) || valid.strand(strand))
-    result = .Call(bigWig_bp_chrom_query, bw, op, chrom, step, with.attributes, gap.value, abs.value, FALSE, bwMap)
+    result <- .Call(bigWig_bp_chrom_query, bw, op, chrom, step, with.attributes, gap.value, abs.value, FALSE, bwMap)
     
     # for now handle bwMap here
     if (!is.null(bwMap)) {
-      res_map = step.bpQuery.bwMap(bwMap, chrom, NULL, NULL, step, strand, op = "thresh", with.attributes = FALSE)
+      res_map <- step.bpQuery.bwMap(bwMap, chrom, NULL, NULL, step, strand, op = "thresh", with.attributes = FALSE)
       
       result[res_map == 1] = NA
-      res_map = NULL
+      res_map <- NULL
     }
 
     return(result)
@@ -80,10 +80,10 @@ step.bpQuery.bigWig <- function(bw, chrom, start, end, step, strand = NA, op = "
       
   if (!is.na(strand)) {
     stopifnot(valid.strand(strand))
-    bed = data.frame(chrom, start, end, 0, 0, strand)
+    bed <- data.frame(chrom, start, end, 0, 0, strand)
     .Call(bigWig_bp_query, bw, NULL, bed, op, step, TRUE, with.attributes, FALSE, gap.value, abs.value, FALSE, bwMap)[[1]]
   } else {
-    bed = data.frame(chrom, start, end)
+    bed <- data.frame(chrom, start, end)
     .Call(bigWig_bp_query, bw, NULL, bed, op, step, FALSE, with.attributes, FALSE, gap.value, abs.value, FALSE, bwMap)[[1]]
   }
 }
@@ -97,13 +97,13 @@ bed.step.bpQuery.bigWig <- function(bw, bed, step, strand = NA, op = "sum", abs.
   bed.valid.query.range(bed, step = step)
   
   if (as.matrix) {
-    sizes = bed[,3] - bed[,2]
+    sizes <- bed[,3] - bed[,2]
     stopifnot(all(sizes == sizes[1]))
   }
 
   if (!is.na(strand)) {
     stopifnot(valid.strand(strand))
-    bed = cbind(bed[,c(1:3)], data.frame(0, 0, strand))
+    bed <- cbind(bed[,c(1:3)], data.frame(0, 0, strand))
     .Call(bigWig_bp_query, bw, bw, bed, op, step, TRUE, with.attributes, as.matrix, gap.value, abs.value, FALSE, bwMap)
   } else {
     .Call(bigWig_bp_query, bw, NULL, bed, op, step, FALSE, with.attributes, as.matrix, gap.value, abs.value, FALSE, bwMap)
@@ -119,7 +119,7 @@ bed6.step.bpQuery.bigWig <- function(bw.plus, bw.minus, bed6, step, op = "sum", 
   bed.valid.query.range(bed6, step = step)
 
   if (as.matrix) {
-    sizes = bed6[,3] - bed6[,2]
+    sizes <- bed6[,3] - bed6[,2]
     stopifnot(all(sizes == sizes[1]))
   }
   

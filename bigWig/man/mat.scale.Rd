@@ -34,3 +34,11 @@ zeroToOne.scale(mat, ...)
 }
 
 \author{André Luís Martins}
+
+\examples{
+mat <- matrix(c(10, 20, 30, 40, 50, 60), nrow = 2)
+rpkm.scale(mat, step = 10, libSize = 1e7)
+densityToOne.scale(mat)
+maxToOne.scale(mat)
+zeroToOne.scale(mat)
+}

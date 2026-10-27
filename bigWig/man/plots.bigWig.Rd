@@ -22,6 +22,8 @@
 \item{...}{other graphical parameters (see ‘par’).}
 }
 
+\value{Called for its side effect (plotting); returns NULL invisibly.}
+
 \author{André Luís Martins}
 
 \seealso{See \code{\link{metaprofile.bigWig}} to generate a meta-profile from a bigWig instance.}
@@ -31,3 +33,13 @@
 \keyword{ bigWig }
 \keyword{ metaprofile }
 \keyword{ plot }
+
+\examples{
+bw <- load.bigWig(system.file("extdata", "test_probe_bp.bigWig", package = "bigWig"))
+bed <- data.frame(chrom = "chrP", start = 0L, end = 50L,
+                  name = ".", score = 0L, strand = "+",
+                  stringsAsFactors = FALSE)
+prof <- metaprofile.bigWig(bed, bw)
+plot(prof)
+unload.bigWig(bw)
+}

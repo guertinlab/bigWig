@@ -36,3 +36,15 @@ upstream.bed(bed, upstreamWindow)
 }
 
 \author{André Luís Martins}
+
+\examples{
+bed <- data.frame(chrom = "chr1", start = 1000L, end = 2000L,
+                  name = "gene1", score = 0L, strand = "+",
+                  stringsAsFactors = FALSE)
+
+center.bed(bed, upstreamWindow = 500, downstreamWindow = 500)
+fiveprime.bed(bed, upstreamWindow = 200, downstreamWindow = 200)
+threeprime.bed(bed, upstreamWindow = 200, downstreamWindow = 200)
+upstream.bed(bed, upstreamWindow = 500)
+downstream.bed(bed, downstreamWindow = 500)
+}

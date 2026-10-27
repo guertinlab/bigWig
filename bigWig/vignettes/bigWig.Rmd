@@ -1324,3 +1324,9 @@ plot.metaprofile(composite.plus, minus.profile = composite.min, X0 = 255,
       xlab = "Distance (bp)", ylab = "PRO-seq signal")
 
 ```
+
+# Session Info
+
+```{r sessionInfo}
+sessionInfo()
+```

@@ -34,3 +34,9 @@ query.bigWig(bigWig, chrom, start, end, clip = TRUE)
 % R documentation directory.
 \keyword{ bigWig }
 \keyword{ query }% __ONLY ONE__ keyword per line
+
+\examples{
+bw <- load.bigWig(system.file("extdata", "test3_chrU.bigWig", package = "bigWig"))
+query.bigWig(bw, "chrU", 0, 50)
+unload.bigWig(bw)
+}

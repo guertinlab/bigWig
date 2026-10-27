@@ -3,19 +3,19 @@
 #
 
 load.bwMap <- function(filename, read.len, read.left.edge, threshold.fraction = 0, udcDir=NULL) {
-  read.len = as.integer(read.len)
+  read.len <- as.integer(read.len)
   stopifnot(read.len > 0)
   stopifnot(is.logical(read.left.edge))
   stopifnot(threshold.fraction >= 0 && threshold.fraction <= 1)
   
-  bw = load.bigWig(filename, udcDir = udcDir)
+  bw <- load.bigWig(filename, udcDir = udcDir)
   
   if (bw$max != 1 || (bw$min != 1 && bw$min != 0)) {
     unload.bigWig(bw)
     stop("mappability bigWig file should only have zero or one values (one for unmappable positions)")
   }
   
-  res = list(bw = bw, read.len = read.len, read.left.edge = read.left.edge, threshold.fraction = threshold.fraction)
+  res <- list(bw = bw, read.len = read.len, read.left.edge = read.left.edge, threshold.fraction = threshold.fraction)
   
   class(res) <- "bwMap"
   return(res)
@@ -65,7 +65,7 @@ region.bpQuery.bwMap <- function(bwMap, chrom, start, end, strand, op = "thresh"
     stop("bigWig does not contain information on chromosome: ", chrom)
   }
 
-  bed = data.frame(chrom, start, end, 0, 0, strand)
+  bed <- data.frame(chrom, start, end, 0, 0, strand)
   .Call(bwMap_bp_query, bwMap, bed, op, NA, FALSE, TRUE)
 }
 
@@ -90,8 +90,8 @@ step.bpQuery.bwMap <- function(bwMap, chrom, start, end, step, strand, op = "thr
   }
   
   if (is.null(start) && is.null(end)) {
-    chromIdx = which(bwMap$bw$chroms == chrom)
-    bed = data.frame(chrom, 0, bwMap$bw$chromSizes[chromIdx], 0, 0, strand)
+    chromIdx <- which(bwMap$bw$chroms == chrom)
+    bed <- data.frame(chrom, 0, bwMap$bw$chromSizes[chromIdx], 0, 0, strand)
     
     return(.Call(bwMap_bp_query, bwMap, bed, op, step, with.attributes, FALSE)[[1]])
   }
@@ -100,7 +100,7 @@ step.bpQuery.bwMap <- function(bwMap, chrom, start, end, step, strand, op = "thr
 
   valid.query.range(start, end, step = step)
     
-  bed = data.frame(chrom, start, end, 0, 0, strand)
+  bed <- data.frame(chrom, start, end, 0, 0, strand)
   .Call(bwMap_bp_query, bwMap, bed, op, step, with.attributes, FALSE)[[1]]
 }
 
@@ -111,7 +111,7 @@ bed6.step.bpQuery.bwMap <- function(bwMap, bed6, step, op = "thresh", with.attri
   bed.valid.query.range(bed6, step = step)
 
   if (as.matrix) {
-    sizes = bed6[,3] - bed6[,2]
+    sizes <- bed6[,3] - bed6[,2]
     stopifnot(all(sizes == sizes[1]))
   }
   

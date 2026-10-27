@@ -68,3 +68,14 @@ By convention, a mappability bigWig indicates mappable positions as 0 and unmapp
 % R documentation directory.
 \keyword{ bwMap }
 \keyword{ bpQuery }% __ONLY ONE__ keyword per line
+
+\examples{
+## bwMap requires a mappability bigWig file (values 0/1 per position).
+## The following illustrates typical usage with such a file:
+\dontrun{
+  bwmap <- load.bwMap("mappability.bigWig", read.len = 50,
+                      read.left.edge = TRUE)
+  print(bwmap)
+  unload.bwMap(bwmap)
+}
+}
