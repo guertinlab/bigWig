@@ -72,7 +72,7 @@ By convention, a mappability bigWig indicates mappable positions as 0 and unmapp
 \examples{
 ## bwMap requires a mappability bigWig file (values 0/1 per position).
 ## The following illustrates typical usage with such a file:
-\dontrun{
+\donttest{
   bwmap <- load.bwMap("mappability.bigWig", read.len = 50,
                       read.left.edge = TRUE)
   print(bwmap)
