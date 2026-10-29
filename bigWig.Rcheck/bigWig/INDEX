@@ -1,0 +1,13 @@
+bigWig-package          bigWig Query Library ~~ bigWig ~~
+bpQuery.bigWig          Query bigWig Files Containing Base Pair Data
+center.bed              BED Transformation Utility Functions
+foreach.bed             Foreach loop for BED files (data.frames)
+load.bigWig             Load bigWig Files
+load.bwMap              Query mappability bigWig files
+plot.metaprofile        Plot meta-profile(s)
+print.bigWig            Print Information on bigWig Files
+probeQuery.bigWig       Query bigWig Files Containing Probe Data
+quantiles.metaprofile   Data Profile Utility Functions
+query.bigWig            Query bigWig Files
+rpkm.scale              Data Matrix Scalling Utility Functions
+unload.bigWig           Unload bigWig Files
