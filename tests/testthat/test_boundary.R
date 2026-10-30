@@ -1,5 +1,3 @@
-context("boundary tests")
-
 test_that("region probe sum", {
 
   # start/end within probe

@@ -1,5 +1,3 @@
-context("coordinate checks")
-
 test_that("chrom missing", {
 
   bed = data.frame("chrBogus", 10, 20)

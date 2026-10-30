@@ -1,5 +1,3 @@
-context("query modifiers")
-
 test_that("step >= 1", {
 
   bed = data.frame("chrB", 10, 20)
