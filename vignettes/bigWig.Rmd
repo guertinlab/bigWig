@@ -20,10 +20,14 @@ vignette: >
     
 # Prerequisites
 
-The R _bigWig_ libraries require an _R_ version of >= 2.12.0.
+The R _bigWig_ libraries require an _R_ version of >= 4.5.0.
 
 
 # Introduction
+The _bigWig_ package provides an efficient R interface to the UCSC bigWig file format, which is widely used in genomics to store genome-wide coverage and signal tracks from high-throughput sequencing experiments. bigWig files are produced by the majority of Bioconductor workflows — ChIP-seq, ATAC-seq, RNA-seq, PRO-seq, and related assays — and are the standard exchange format for genome browser visualization and downstream quantitative analysis.
+
+While the Bioconductor package _rtracklayer_ can import bigWig data, _bigWig_ is designed for high-performance bulk queries: counting operations over large sets of genomic intervals, stepwise windowed queries, strand-aware metaprofile computation, and mappability correction. These operations are implemented via a direct C interface to the UCSC kent/jkweb library, enabling fast random access to both local and remote (HTTP/HTTPS) bigWig files without loading entire files into memory.
+
 The _bigWig_ package efficiently queries _bigWig_ files over genomic intervals. The functions perform counting operations over regions, stepwise through windows, over _BED_ formatted data frames, and with DNA strand-specificity. The functions can incorporate a mappability file, which determines areas of the genome that are not mappable at a specified k-mer and excludes these regions from calculations. Additional functions calculate statistics and scale the data. Plotting functions are available for data visualization. The following definitions are used throughout the vignette:
 
 * __Genomic interval__ is the basic unit of these functions and is a segment of a genome file. It is defined by listing the chromosome [`chrom=`], starting index number [`start=`] and the ending index number [`end=`].
@@ -42,18 +46,22 @@ The _bigWig_ package efficiently queries _bigWig_ files over genomic intervals. 
 
 ## Installation
 
-_bigWig_ is not yet available on _Bioconductor_, so `install.packages('bigWig')` will not work. Below are installation instructions from GitHub and locally stored source files.
+The recommended way to install _bigWig_ is via _Bioconductor_:
+
+```{r eval=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("bigWig")
+```
 
 ### Install from GitHub
 
-The most up to date version of the `bigWig` pkg is located at [bigWig](https://github.com/andrelmartins/bigWig). Using `devtools`, you can download and install `bigWig` from GitHub directly.
+The development version is available at [guertinlab/bigWig](https://github.com/guertinlab/bigWig):
 
 ```{r eval=FALSE}
-#install devtools if necessary
-install.packages("devtools")
-
-devtools::install_github('andrelmartins/bigWig',
-              subdir='bigWig')
+if (!requireNamespace("remotes", quietly = TRUE))
+    install.packages("remotes")
+remotes::install_github("guertinlab/bigWig")
 ```
 
 ### Install from a local directory
